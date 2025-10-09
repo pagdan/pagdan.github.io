@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Pagdanganan Robert Martin Gosioco — Portfolio</title>
+        <meta
+            name="description"
+            content="Personal portfolio: resume, photography, keyboards, and coffee blog. Minimal black & white design."
+        />
+        <style>
+            /* Reset */
+            * {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                height: 100%;
+            }
+            body {
+                margin: 0;
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                    "Helvetica Neue", Arial, system-ui;
+                background: #fff;
+                color: #000;
+                line-height: 1.5;
+                -webkit-font-smoothing: antialiased;
+                scroll-behavior: smooth;
+            }
+            .container {
+                max-width: 980px;
+                margin: 0 auto;
+                padding: 3.5rem 1rem;
+            }
+            header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1rem 0;
+                position: sticky;
+                top: 0;
+                background: linear-gradient(
+                    0deg,
+                    rgba(255, 255, 255, 0.85),
+                    rgba(255, 255, 255, 0.85)
+                );
+                backdrop-filter: blur(4px);
+                z-index: 10;
+            }
+            .brand {
+                font-weight: 700;
+                letter-spacing: 0.06em;
+            }
+            .nav a {
+                margin-left: 1rem;
+                text-decoration: none;
+                color: inherit;
+                font-weight: 600;
+            }
+            .hero {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+                padding: 2rem 0;
+            }
+            .hero h1 {
+                font-size: 2.25rem;
+                margin: 0;
+            }
+            .hero p {
+                max-width: 60ch;
+                color: #222;
+            }
+            .section {
+                padding: 4rem 0;
+                border-top: 1px solid #eee;
+            }
+            .resume-card {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .button {
+                display: inline-block;
+                padding: 0.6rem 0.9rem;
+                border: 1px solid #000;
+                text-decoration: none;
+                font-weight: 600;
+                border-radius: 6px;
+            }
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 12px;
+            }
+            .photo {
+                width: 100%;
+                aspect-ratio: 4/3;
+                object-fit: cover;
+                border: 1px solid #ddd;
+                cursor: pointer;
+            }
+            .footer {
+                padding: 2rem 0;
+                color: #555;
+                font-size: 0.95rem;
+                border-top: 1px solid #eee;
+            }
+            .blog-post {
+                padding: 1rem;
+                border: 1px solid #eee;
+                border-radius: 6px;
+            }
+            .post-title {
+                margin: 0 0 0.5rem 0;
+                font-size: 1.05rem;
+            }
+            .read-more {
+                display: inline-block;
+                margin-top: 0.5rem;
+                text-decoration: none;
+            }
+            .modal {
+                position: fixed;
+                inset: 0;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                background: rgba(0, 0, 0, 0.7);
+                z-index: 100;
+            }
+            .modal.open {
+                display: flex;
+            }
+            .modal-content {
+                background: #fff;
+                color: #000;
+                padding: 1rem;
+                max-width: 900px;
+                max-height: 90vh;
+                overflow: auto;
+                border-radius: 8px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                position: relative;
+            }
+            .close-btn {
+                border: none;
+                background: none;
+                font-size: 1.1rem;
+                position: absolute;
+                right: 1rem;
+                top: 1rem;
+                cursor: pointer;
+            }
+            @media (max-width: 600px) {
+                .hero h1 {
+                    font-size: 1.6rem;
+                }
+                header {
+                    padding: 0.5rem 0;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header class="container">
+            <div class="brand">Pagdanganan Robert Martin Gosioco</div>
+            <nav class="nav" aria-label="Main navigation">
+                <a href="#about">About</a>
+                <a href="#resume">Resume</a>
+                <a href="#portfolio">Photography</a>
+                <a href="#keyboards">Keyboard Builds</a>
+                <a href="#blog">Coffee Blog</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
+
+        <main class="container">
+            <section id="about" class="hero">
+                <h1>Hi, I’m Robert.</h1>
+                <p>
+                    I build keyboards, take photographs, and drink too much
+                    coffee. This minimal portfolio showcases my resume, selected
+                    photos, keyboard builds, and a short blog on coffee.
+                </p>
+            </section>
+
+            <section id="resume" class="section">
+                <h2>Resume</h2>
+                <div class="resume-card">
+                    <p>
+                        <strong>Title / Role</strong> — Short one-line summary
+                        about what you do.
+                    </p>
+                    <p>
+                        <strong>Experience</strong> — Brief bullets or summary
+                        of past roles and skills.
+                    </p>
+                    <div>
+                        <a
+                            class="button"
+                            href="/resume.pdf"
+                            target="_blank"
+                            rel="noopener"
+                            >Download Resume (PDF)</a
+                        >
+                        <a
+                            class="button"
+                            href="#"
+                            id="printResume"
+                            style="margin-left: 8px"
+                            >Print</a
+                        >
+                    </div>
+                </div>
+            </section>
+
+            <section id="portfolio" class="section">
+                <h2>Selected Photography</h2>
+                <p>Click any image to view.</p>
+                <div class="grid" id="gallery">
+                    <figure>
+                        <img
+                            src="photos/photo1.jpg"
+                            alt="Photo 1"
+                            class="photo"
+                            loading="lazy"
+                            data-full="photos/photo1.jpg"
+                        />
+                    </figure>
+                    <figure>
+                        <img
+                            src="photos/photo2.jpg"
+                            alt="Photo 2"
+                            class="photo"
+                            loading="lazy"
+                            data-full="photos/photo2.jpg"
+                        />
+                    </figure>
+                    <figure>
+                        <img
+                            src="photos/photo3.jpg"
+                            alt="Photo 3"
+                            class="photo"
+                            loading="lazy"
+                            data-full="photos/photo3.jpg"
+                        />
+                    </figure>
+                    <figure>
+                        <img
+                            src="photos/photo4.jpg"
+                            alt="Photo 4"
+                            class="photo"
+                            loading="lazy"
+                            data-full="photos/photo4.jpg"
+                        />
+                    </figure>
+                </div>
+            </section>
+
+            <section id="keyboards" class="section">
+                <h2>Keyboard Builds</h2>
+                <p>Click any keyboard image to view details.</p>
+                <div class="grid" id="keyboardGallery">
+                    <figure>
+                        <img
+                            src="keyboards/keyboard1.jpg"
+                            alt="Keyboard 1"
+                            class="photo"
+                            loading="lazy"
+                            data-full="keyboards/keyboard1.jpg"
+                        />
+                    </figure>
+                    <figure>
+                        <img
+                            src="keyboards/keyboard2.jpg"
+                            alt="Keyboard 2"
+                            class="photo"
+                            loading="lazy"
+                            data-full="keyboards/keyboard2.jpg"
+                        />
+                    </figure>
+                    <figure>
+                        <img
+                            src="keyboards/keyboard3.jpg"
+                            alt="Keyboard 3"
+                            class="photo"
+                            loading="lazy"
+                            data-full="keyboards/keyboard3.jpg"
+                        />
+                    </figure>
+                    <figure>
+                        <img
+                            src="keyboards/keyboard4.jpg"
+                            alt="Keyboard 4"
+                            class="photo"
+                            loading="lazy"
+                            data-full="keyboards/keyboard4.jpg"
+                        />
+                    </figure>
+                </div>
+            </section>
+
+            <section id="blog" class="section">
+                <h2>Coffee Blog</h2>
+                <p>Short notes and tasting logs about coffee.</p>
+                <div id="posts" class="grid"></div>
+                <div style="margin-top: 1rem; color: #666; font-size: 0.9rem">
+                    To add a new post: create a markdown file under
+                    <code>/posts/</code> and commit it. This template uses
+                    simple client-side rendering.
+                </div>
+            </section>
+
+            <section id="contact" class="section">
+                <h2>Contact</h2>
+                <p>
+                    Email:
+                    <a href="mailto:pagdan@proton.me">pagdan@proton.me</a>
+                </p>
+                <p>
+                    GitHub:
+                    <a
+                        href="https://github.com/pagdan"
+                        target="_blank"
+                        rel="noopener"
+                        >github.com/pagdan</a
+                    >
+                </p>
+            </section>
+
+            <footer class="footer">
+                © <span id="year"></span> Pagdanganan Robert Martin Gosioco.
+                Built with simple HTML, JS, & CSS.
+            </footer>
+        </main>
+
+        <!-- Modal for gallery and posts -->
+        <div id="modal" class="modal" role="dialog" aria-hidden="true">
+            <div class="modal-content" id="modalContent" role="document">
+                <button class="close-btn" id="closeModal" aria-label="Close">
+                    ✕
+                </button>
+                <div id="modalBody"></div>
+            </div>
+        </div>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"
+            defer
+        ></script>
+        <script>
+            document.getElementById("year").textContent =
+                new Date().getFullYear();
+            document
+                .getElementById("printResume")
+                .addEventListener("click", function (e) {
+                    e.preventDefault();
+                    window.open("/resume.pdf", "_blank");
+                });
+
+            // Gallery lightbox
+            const modal = document.getElementById("modal");
+            const modalBody = document.getElementById("modalBody");
+            function openModal(html) {
+                modalBody.innerHTML = html;
+                modal.classList.add("open");
+                modal.setAttribute("aria-hidden", "false");
+            }
+            function closeModal() {
+                modal.classList.remove("open");
+                modal.setAttribute("aria-hidden", "true");
+                modalBody.innerHTML = "";
+            }
+            document
+                .getElementById("closeModal")
+                .addEventListener("click", closeModal);
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            document.querySelectorAll("#gallery img").forEach((img) => {
+                img.addEventListener("click", () => {
+                    const src = img.getAttribute("data-full") || img.src;
+                    openModal(
+                        '<img src="' +
+                            src +
+                            '" alt="' +
+                            (img.alt || "Photo") +
+                            '" style="max-width:100%;height:auto;display:block;margin:0 auto;">',
+                    );
+                });
+            });
+
+            document.querySelectorAll("#keyboardGallery img").forEach((img) => {
+                img.addEventListener("click", () => {
+                    const src = img.getAttribute("data-full") || img.src;
+                    openModal(
+                        '<img src="' +
+                            src +
+                            '" alt="' +
+                            (img.alt || "Keyboard") +
+                            '" style="max-width:100%;height:auto;display:block;margin:0 auto;">',
+                    );
+                });
+            });
+
+            // Simple client-side blog renderer
+            const POSTS = [
+                {
+                    slug: "2025-09-01-ethiopian-beans",
+                    title: "Ethiopian beans and floral notes",
+                    date: "2025-09-01",
+                    excerpt: "Tasting notes from a cup of Yirgacheffe...",
+                    content: `## Ethiopian Yirgacheffe\n\nI brewed this with a 1:16 ratio...`,
+                },
+                {
+                    slug: "2025-08-12-espresso-trick",
+                    title: "A small trick with espresso yield",
+                    date: "2025-08-12",
+                    excerpt:
+                        "A tidy trick to balance extraction when you have low pressure...",
+                    content: `Try adjusting the grind by small increments...`,
+                },
+            ];
+
+            function renderPosts() {
+                const container = document.getElementById("posts");
+                container.innerHTML = "";
+                POSTS.forEach((p) => {
+                    const el = document.createElement("article");
+                    el.className = "blog-post";
+                    el.innerHTML =
+                        '<h3 class="post-title">' +
+                        p.title +
+                        '<\/h3><div style="font-size:.9rem;color:#666">' +
+                        p.date +
+                        "<\/div><p>" +
+                        p.excerpt +
+                        '<\/p><a href="#" class="read-more" data-slug="' +
+                        p.slug +
+                        '">Read<\/a>';
+                    container.appendChild(el);
+                });
+                document.querySelectorAll(".read-more").forEach((a) => {
+                    a.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        const slug = this.dataset.slug;
+                        const post = POSTS.find((x) => x.slug === slug);
+                        if (!post) return;
+                        const html = window.marked
+                            ? marked.parse(post.content)
+                            : "<pre>" + escapeHtml(post.content) + "</pre>";
+                        openModal(
+                            "<h2>" +
+                                post.title +
+                                '<\/h2><div style="color:#666;font-size:.9rem;margin-bottom:1rem;">' +
+                                post.date +
+                                "<\/div>" +
+                                html,
+                        );
+                    });
+                });
+            }
+            function escapeHtml(s) {
+                return s.replace(
+                    /[&<>\"]/g,
+                    (c) =>
+                        ({
+                            "&": "&amp;",
+                            "<": "&lt;",
+                            ">": "&gt;",
+                            '"': "&quot;",
+                        })[c],
+                );
+            }
+            renderPosts();
+
+            // Accessibility: keyboard close
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") closeModal();
+            });
+        </script>
+    </body>
+</html>
