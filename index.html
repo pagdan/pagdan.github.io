@@ -369,137 +369,80 @@
             </div>
         </div>
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"
-            defer
-        ></script>
-        <script>
-            document.getElementById("year").textContent =
-                new Date().getFullYear();
-            document
-                .getElementById("printResume")
-                .addEventListener("click", function (e) {
-                    e.preventDefault();
-                    window.open("/resume.pdf", "_blank");
-                });
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-            // Gallery lightbox
-            const modal = document.getElementById("modal");
-            const modalBody = document.getElementById("modalBody");
-            function openModal(html) {
-                modalBody.innerHTML = html;
-                modal.classList.add("open");
-                modal.setAttribute("aria-hidden", "false");
-            }
-            function closeModal() {
-                modal.classList.remove("open");
-                modal.setAttribute("aria-hidden", "true");
-                modalBody.innerHTML = "";
-            }
-            document
-                .getElementById("closeModal")
-                .addEventListener("click", closeModal);
-            modal.addEventListener("click", (e) => {
-                if (e.target === modal) closeModal();
+    const modal = document.getElementById("modal");
+    const modalBody = document.getElementById("modalBody");
+    const closeModal = () => {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        modalBody.innerHTML = "";
+    };
+    document.getElementById("closeModal").addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModal();
+    });
+
+    const POSTS = [
+        {
+            slug: "2025-09-01-ethiopian-beans",
+            title: "Ethiopian beans and floral notes",
+            date: "2025-09-01",
+            excerpt: "Tasting notes from a cup of Yirgacheffe...",
+            content: `## Ethiopian Yirgacheffe\n\nI brewed this with a 1:16 ratio...`,
+        },
+        {
+            slug: "2025-08-12-espresso-trick",
+            title: "A small trick with espresso yield",
+            date: "2025-08-12",
+            excerpt: "A tidy trick to balance extraction when you have low pressure...",
+            content: `Try adjusting the grind by small increments...`,
+        },
+    ];
+
+    function openModal(html) {
+        modalBody.innerHTML = html;
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+    }
+
+    function renderPosts() {
+        const container = document.getElementById("posts");
+        POSTS.forEach((p) => {
+            const el = document.createElement("article");
+            el.className = "blog-post";
+            el.innerHTML = `
+                <h3 class="post-title">${p.title}</h3>
+                <div style="font-size:.9rem;color:#666">${p.date}</div>
+                <p>${p.excerpt}</p>
+                <a href="#" class="read-more" data-slug="${p.slug}">Read</a>
+            `;
+            container.appendChild(el);
+        });
+
+        document.querySelectorAll(".read-more").forEach((a) => {
+            a.addEventListener("click", function (e) {
+                e.preventDefault();
+                const post = POSTS.find((x) => x.slug === this.dataset.slug);
+                if (!post) return;
+                const html = marked.parse(post.content);
+                openModal(`
+                    <h2>${post.title}</h2>
+                    <div style="color:#666;font-size:.9rem;margin-bottom:1rem;">${post.date}</div>
+                    ${html}
+                `);
             });
+        });
+    }
 
-            document.querySelectorAll("#gallery img").forEach((img) => {
-                img.addEventListener("click", () => {
-                    const src = img.getAttribute("data-full") || img.src;
-                    openModal(
-                        '<img src="' +
-                            src +
-                            '" alt="' +
-                            (img.alt || "Photo") +
-                            '" style="max-width:100%;height:auto;display:block;margin:0 auto;">',
-                    );
-                });
-            });
-
-            document.querySelectorAll("#keyboardGallery img").forEach((img) => {
-                img.addEventListener("click", () => {
-                    const src = img.getAttribute("data-full") || img.src;
-                    openModal(
-                        '<img src="' +
-                            src +
-                            '" alt="' +
-                            (img.alt || "Keyboard") +
-                            '" style="max-width:100%;height:auto;display:block;margin:0 auto;">',
-                    );
-                });
-            });
-
-            // Simple client-side blog renderer
-            const POSTS = [
-                {
-                    slug: "2025-09-01-ethiopian-beans",
-                    title: "Ethiopian beans and floral notes",
-                    date: "2025-09-01",
-                    excerpt: "Tasting notes from a cup of Yirgacheffe...",
-                    content: `## Ethiopian Yirgacheffe\n\nI brewed this with a 1:16 ratio...`,
-                },
-                {
-                    slug: "2025-08-12-espresso-trick",
-                    title: "A small trick with espresso yield",
-                    date: "2025-08-12",
-                    excerpt:
-                        "A tidy trick to balance extraction when you have low pressure...",
-                    content: `Try adjusting the grind by small increments...`,
-                },
-            ];
-
-            function renderPosts() {
-                const container = document.getElementById("posts");
-                container.innerHTML = "";
-                POSTS.forEach((p) => {
-                    const el = document.createElement("article");
-                    el.className = "blog-post";
-                    el.innerHTML =
-                        '<h3 class="post-title">' +
-                        p.title +
-                        '<\/h3><div style="font-size:.9rem;color:#666">' +
-                        p.date +
-                        "<\/div><p>" +
-                        p.excerpt +
-                        '<\/p><a href="#" class="read-more" data-slug="' +
-                        p.slug +
-                        '">Read<\/a>';
-                    container.appendChild(el);
-                });
-                document.querySelectorAll(".read-more").forEach((a) => {
-                    a.addEventListener("click", function (e) {
-                        e.preventDefault();
-                        const slug = this.dataset.slug;
-                        const post = POSTS.find((x) => x.slug === slug);
-                        if (!post) return;
-                        const html = window.marked
-                            ? marked.parse(post.content)
-                            : "<pre>" + escapeHtml(post.content) + "</pre>";
-                        openModal(
-                            "<h2>" +
-                                post.title +
-                                '<\/h2><div style="color:#666;font-size:.9rem;margin-bottom:1rem;">' +
-                                post.date +
-                                "<\/div>" +
-                                html,
-                        );
-                    });
-                });
-            }
-            function escapeHtml(s) {
-                return s.replace(
-                    /[&<>\"]/g,
-                    (c) =>
-                        ({
-                            "&": "&amp;",
-                            "<": "&lt;",
-                            ">": "&gt;",
-                            '"': "&quot;",
-                        })[c],
-                );
-            }
-            renderPosts();
-
+        renderPosts();
+    });
             // Accessibility: keyboard close
             document.addEventListener("keydown", (e) => {
                 if (e.key === "Escape") closeModal();
