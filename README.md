@@ -1,1 +1,1 @@
-hi, welcome to my simple website
+hi, welcome to my personal website
